@@ -11,6 +11,11 @@ class Article extends Model
 
     protected $dates = ['published_at'];
 
+    public function tags()
+    {
+        return $this->hasMany(Tag::class);
+    }
+
     protected static function boot()
     {
         parent::boot();
