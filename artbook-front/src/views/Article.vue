@@ -19,6 +19,7 @@
             class="mb-2"
         />
         <span>{{ article && article.text || 'Пусто'}}</span>
+        <comments :article="article"/>
         <div class="flex-row">
             <tags :article="article"/>
             <likes :article="article" @like="showSnack"/>
@@ -31,6 +32,7 @@
 import Tags from "@/components/Tags"
 import Likes from "@/components/Likes"
 import Views from "@/components/Views"
+import Comments from "@/components/Comments"
 export default {
     name: 'Article',
     data: () => ({
@@ -52,7 +54,8 @@ export default {
     components: {
         Tags,
         Likes,
-        Views
+        Views,
+        Comments
     }
 }
 </script>

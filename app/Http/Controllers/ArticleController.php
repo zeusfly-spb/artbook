@@ -26,7 +26,7 @@ class ArticleController extends Controller
 
     public function show(string $slug)
     {
-        $article = Article::with('tags')->where('slug', $slug)->first();
+        $article = Article::with('tags', 'comments')->where('slug', $slug)->first();
         $result = $article ? response()->json($article->toArray()) :
             response()->json(['error' => 'Статья не найдена'], 500);
         return $result;
@@ -52,6 +52,18 @@ class ArticleController extends Controller
             $result = response()->json(['views' => $article->views]);
         } catch (Exception $e) {
             $result = response()->json(['error' => "Ошибка добавления просмотра: {$e->getMessage()}"], 500);
+        }
+        return $result;
+    }
+
+    public function addComment(Request $request)
+    {
+        try {
+            $article = Article::find($request->article_id);
+            $comment = $article->addComment((object) ['subject' => $request->subject, 'body' => $request->body]);
+            $result = response()->json(['comment' => $comment->toArray()]);
+        } catch (Exception $e) {
+            $result = response()->json(['error' => "Ошибка сохранение комментария: {$e->getMessage()}", 500]);
         }
         return $result;
     }
