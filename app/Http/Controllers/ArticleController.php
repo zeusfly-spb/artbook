@@ -7,8 +7,20 @@ use Illuminate\Http\Request;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        return response()->json(Article::all()->toArray());
+        $builder = Article::query();
+        $paginator = $builder->orderByDesc('id')->paginate($request->per_page);
+        $articles = $paginator->items();
+        $paginatorData = [
+            'total' => $paginator->total(),
+            'lastPage' => $paginator->lastPage(),
+            'perPage' => $paginator->perPage(),
+            'currentPage' => $paginator->currentPage()
+        ];
+        return response()->json([
+            'articles' => $articles,
+            'paginator_data' => $paginatorData
+        ]);
     }
 }
