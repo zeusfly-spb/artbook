@@ -11,12 +11,18 @@
             class="mb-2"
         />
         <span>{{ article && article.text || 'Пусто'}}</span>
-        <tags :article="article"/>
+        <div class="flex-row">
+            <tags :article="article" style="display: inline"/>
+            <likes :article="article" style="display: inline"/>
+        </div>
+
+
     </v-card>
 </template>
 
 <script>
-import Tags from "@/components/Tags";
+import Tags from "@/components/Tags"
+import Likes from "@/components/Likes"
 export default {
     name: 'Article',
     computed: {
@@ -28,7 +34,8 @@ export default {
         this.$store.dispatch('setCurrentArticle', this.$route.params.slug)
     },
     components: {
-        Tags
+        Tags,
+        Likes
     }
 }
 </script>

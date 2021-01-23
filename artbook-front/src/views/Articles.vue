@@ -17,7 +17,7 @@
 </template>
 
 <script>
-import Thumbnail from "@/components/Thumbnail";
+import Thumbnail from "@/components/Thumbnail"
 export default {
     name: 'Articles',
     computed: {
