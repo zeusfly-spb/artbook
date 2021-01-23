@@ -15,6 +15,9 @@ export default new Vuex.Store({
       }
   },
   mutations: {
+      SET_PAGINATOR_PAGE (state, page) {
+          state.paginator.page = page
+      },
       SET_ARTICLES (state, articles) {
           state.articles = articles
       },
@@ -34,7 +37,7 @@ export default new Vuex.Store({
           state.paginator.page = sync.currentPage
       },
       UPDATE_PAGINATION (state, data) {
-          state.paginator.page = data.page || 1
+          state.paginator.page = data.currentPage || 1
           state.paginator.per_page = data.rowsPerPage || -1
       }
   },
