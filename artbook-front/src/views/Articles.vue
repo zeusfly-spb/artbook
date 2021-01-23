@@ -40,6 +40,7 @@ export default {
     },
     mounted () {
         this.$store.dispatch('setArticles')
+            .then(() => this.$store.commit('SET_CURRENT_ARTICLE', null))
     },
     components: {
         Thumbnail
