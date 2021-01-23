@@ -32,7 +32,10 @@ export default {
     methods: {
         addLike () {
             this.axios.post('/api/add_like', {article_id: this.article.id})
-                .then(res => this.likes = +res.data.likes)
+                .then(res => {
+                    this.likes = +res.data.likes
+                    this.$emit('like')
+                })
         }
     },
     watch: {

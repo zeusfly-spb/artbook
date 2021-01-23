@@ -2,6 +2,14 @@
     <v-card
         class="flex-column"
     >
+        <v-snackbar
+            v-model="snackbar"
+            timeout="3000"
+            color="green"
+            top
+        >
+            Вы добавили лайк статье
+        </v-snackbar>
         <v-img
             max-height="300"
             max-width="300"
@@ -13,7 +21,7 @@
         <span>{{ article && article.text || 'Пусто'}}</span>
         <div class="flex-row">
             <tags :article="article"/>
-            <likes :article="article"/>
+            <likes :article="article" @like="showSnack"/>
             <views :article="article"/>
         </div>
     </v-card>
@@ -25,9 +33,17 @@ import Likes from "@/components/Likes"
 import Views from "@/components/Views"
 export default {
     name: 'Article',
+    data: () => ({
+        snackbar: false
+    }),
     computed: {
         article () {
             return this.$store.state.currentArticle
+        }
+    },
+    methods: {
+        showSnack () {
+            this.snackbar = true
         }
     },
     mounted () {
