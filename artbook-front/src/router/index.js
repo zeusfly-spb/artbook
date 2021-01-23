@@ -6,22 +6,27 @@ Vue.use(VueRouter)
 
 const routes = [
   {
+
     path: '/',
     name: 'Home',
-    component: Home
+    component: Home,
+    meta: {title: 'Главная'}
   },
   {
-    path: '/about',
-    name: 'About',
-    // route level code-splitting
-    // this generates a separate chunk (about.[hash].js) for this route
-    // which is lazy-loaded when the route is visited.
-    component: () => import(/* webpackChunkName: "about" */ '../views/About.vue')
+    path: '/articles',
+    name: 'Articles',
+    component: () => import('../views/Articles.vue'),
+    meta: {title: 'Статьи'}
   }
 ]
 
 const router = new VueRouter({
   routes
+})
+
+router.beforeEach((to, from, next) => {
+    document.title = `ArtBook - ${to.meta.title}`
+    next()
 })
 
 export default router
