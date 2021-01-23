@@ -49,6 +49,14 @@
                 </v-row>
             </v-container>
         </v-card>
+        <v-alert
+            v-else
+            border="left"
+            color="indigo"
+            dark
+        >
+            Ваше сообщение успешно отправлено
+        </v-alert>
     </div>
 </template>
 
@@ -86,7 +94,7 @@ export default {
     },
     watch: {
         article (val) {
-            this.comments = val.comments
+            this.comments = val.comments.reverse()
         }
     }
 }
