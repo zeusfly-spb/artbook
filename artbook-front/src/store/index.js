@@ -6,6 +6,7 @@ Vue.use(Vuex)
 export default new Vuex.Store({
   state: {
       articles: [],
+      currentArticle: null,
       paginator: {
           page: 1,
           per_page: 10,
@@ -42,9 +43,20 @@ export default new Vuex.Store({
       UPDATE_PAGINATION (state, data) {
           state.paginator.page = data.currentPage || 1
           state.paginator.per_page = data.rowsPerPage || -1
+      },
+      SET_CURRENT_ARTICLE (state, article) {
+          state.currentArticle = article
       }
   },
   actions: {
+      setCurrentArticle ({commit}, slug) {
+          Vue.axios.get(`/api/articles/${slug}`)
+              .then(res => {
+                  commit('SET_CURRENT_ARTICLE', res.data)
+                  Promise.resolve(res.data)
+              })
+              .catch(e => Promise.reject(e))
+      },
       setArticles ({commit, state}) {
           Vue.axios.post('/api/articles', {
               page: state.paginator.page,

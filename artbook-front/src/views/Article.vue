@@ -1,5 +1,6 @@
 <template>
     <div>
+        {{ article && article.text || 'Пусто'}}
 
     </div>
 </template>
@@ -8,11 +9,16 @@
 export default {
     name: 'Article',
     data: () => ({
-        slug: '',
-        article: null
+        slug: ''
     }),
+    computed: {
+        article () {
+            return this.$store.state.currentArticle
+        }
+    },
     mounted () {
         this.slug = this.$route.params.slug
+        this.$store.dispatch('setCurrentArticle', this.slug)
     }
 }
 </script>

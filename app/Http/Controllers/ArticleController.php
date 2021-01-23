@@ -9,8 +9,7 @@ class ArticleController extends Controller
 {
     public function index(Request $request)
     {
-        $builder = Article::query();
-        $paginator = $builder->orderByDesc('id')->paginate($request->per_page);
+        $paginator = Article::query()->orderByDesc('id')->paginate($request->per_page);
         $articles = $paginator->items();
         $paginatorData = [
             'total' => $paginator->total(),
@@ -22,5 +21,13 @@ class ArticleController extends Controller
             'articles' => $articles,
             'paginator_data' => $paginatorData
         ]);
+    }
+
+    public function show(string $slug)
+    {
+        $article = Article::with('tags')->where('slug', $slug)->first();
+        $result = $article ? response()->json($article->toArray()) :
+            response()->json(['error' => 'Статья не найдена'], 400);
+        return $result;
     }
 }
