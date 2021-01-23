@@ -1,8 +1,12 @@
 <template>
     <span
-        class="ml-2"
+        class="ml-1"
     >
-        <v-icon>
+        <v-icon
+            class="clickable"
+            title="Оставить лайк"
+            @click="addLike"
+        >
             mdi-heart-outline
         </v-icon>
         <span
@@ -25,8 +29,16 @@ export default {
     data: () => ({
         likes: 0
     }),
-    mounted () {
-        this.likes = this.article && +this.article.likes || 0
+    methods: {
+        addLike () {
+            this.axios.post('/api/add_like', {article_id: this.article.id})
+                .then(res => this.likes = +res.data.likes)
+        }
+    },
+    watch: {
+        article (val) {
+            this.likes = val.likes
+        }
     }
 }
 </script>

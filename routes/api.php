@@ -20,3 +20,4 @@ Route::middleware('auth:api')->get('/user', function (Request $request) {
 
 Route::post('/articles', 'ArticleController@index');
 Route::get('/articles/{slug}', 'ArticleController@show');
+Route::post('/add_like', 'ArticleController@addLike');

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Article;
+use Exception;
 use Illuminate\Http\Request;
 
 class ArticleController extends Controller
@@ -28,6 +29,18 @@ class ArticleController extends Controller
         $article = Article::with('tags')->where('slug', $slug)->first();
         $result = $article ? response()->json($article->toArray()) :
             response()->json(['error' => 'Статья не найдена'], 400);
+        return $result;
+    }
+
+    public function addLike(Request $request)
+    {
+        try {
+            $article = Article::find($request->article_id);
+            $article->increment('likes');
+            $result = response()->json(['likes' => $article->likes]);
+        } catch (Exception $e) {
+            $result = response()->json(['error' => "Ошибка установки лайка: {$e->getMessage()}"], 400);
+        }
         return $result;
     }
 }

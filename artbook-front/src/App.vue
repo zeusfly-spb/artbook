@@ -31,3 +31,13 @@ export default {
     }
 };
 </script>
+
+<style>
+.clickable {
+    opacity: .8;
+    cursor: pointer;
+}
+.clickable:HOVER {
+    opacity: 1;
+}
+</style>
