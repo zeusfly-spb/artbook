@@ -17,6 +17,6 @@ class Tag extends Model
 
     public function getUrlAttribute()
     {
-        return url('/articles/' . $this->article->slug);
+        return url('/articles/' . $this->article->slug) ;
     }
 }
