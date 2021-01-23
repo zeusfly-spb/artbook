@@ -1,6 +1,5 @@
 <template>
     <v-flex>
-        Список статей
     </v-flex>
 </template>
 
