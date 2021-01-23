@@ -26,14 +26,10 @@ class Article extends Model
 
     public function addComment(object $data)
     {
-        try {
-            return $this->comments()->create([
-                'subject' => $data->subject,
-                'body' => $data->body
-            ]);
-        } catch (Exception $e) {
-
-        }
+        return $this->comments()->create([
+            'subject' => $data->subject,
+            'body' => $data->body
+        ]);
     }
 
     public function getHeaderAttribute()
