@@ -70,8 +70,8 @@ export default {
         body: '',
         comments: [],
         headers: [
-            {text: 'Тема'},
-            {text: 'Комментарий'}
+            {text: 'Тема', sortable: false},
+            {text: 'Комментарий', sortable: false}
         ]
     }),
     computed: {

@@ -5,6 +5,7 @@ namespace App\Http\Controllers;
 use App\Article;
 use Exception;
 use Illuminate\Http\Request;
+use App\Jobs\AddComment;
 
 class ArticleController extends Controller
 {
@@ -63,6 +64,11 @@ class ArticleController extends Controller
             $comment = $article->addComment((object) ['subject' => $request->subject, 'body' => $request->body]);
             $result = response()->json(['comment' => $comment->toArray()]);
         } catch (Exception $e) {
+            AddComment::dispatch((object) [
+                'article_id' => $request->article_id,
+                'subject' => $request->subject,
+                'body' => $request->body
+            ]);
             $result = response()->json(['error' => "Ошибка сохранение комментария: {$e->getMessage()}", 500]);
         }
         return $result;
