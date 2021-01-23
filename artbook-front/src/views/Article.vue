@@ -12,17 +12,17 @@
         />
         <span>{{ article && article.text || 'Пусто'}}</span>
         <div class="flex-row">
-            <tags :article="article" style="display: inline"/>
-            <likes :article="article" style="display: inline"/>
+            <tags :article="article"/>
+            <likes :article="article"/>
+            <views :article="article"/>
         </div>
-
-
     </v-card>
 </template>
 
 <script>
 import Tags from "@/components/Tags"
 import Likes from "@/components/Likes"
+import Views from "@/components/Views"
 export default {
     name: 'Article',
     computed: {
@@ -35,7 +35,8 @@ export default {
     },
     components: {
         Tags,
-        Likes
+        Likes,
+        Views
     }
 }
 </script>

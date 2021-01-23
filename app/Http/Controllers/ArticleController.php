@@ -28,7 +28,7 @@ class ArticleController extends Controller
     {
         $article = Article::with('tags')->where('slug', $slug)->first();
         $result = $article ? response()->json($article->toArray()) :
-            response()->json(['error' => 'Статья не найдена'], 400);
+            response()->json(['error' => 'Статья не найдена'], 500);
         return $result;
     }
 
@@ -39,7 +39,19 @@ class ArticleController extends Controller
             $article->increment('likes');
             $result = response()->json(['likes' => $article->likes]);
         } catch (Exception $e) {
-            $result = response()->json(['error' => "Ошибка установки лайка: {$e->getMessage()}"], 400);
+            $result = response()->json(['error' => "Ошибка установки лайка: {$e->getMessage()}"], 500);
+        }
+        return $result;
+    }
+
+    public function addView(Request $request)
+    {
+        try {
+            $article = Article::find($request->article_id);
+            $article->increment('views');
+            $result = response()->json(['views' => $article->views]);
+        } catch (Exception $e) {
+            $result = response()->json(['error' => "Ошибка добавления просмотра: {$e->getMessage()}"], 500);
         }
         return $result;
     }

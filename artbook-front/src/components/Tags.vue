@@ -1,7 +1,12 @@
 <template>
-    <div
-        class="flex-row"
+    <span
+        class="flex-row ml-2"
     >
+        <span
+            class="caption"
+        >
+            <em>Тэги:</em>
+        </span>
         <span
             v-for="(tag, index) in tags"
             :key="index"
@@ -16,7 +21,7 @@
             </router-link>
 
         </span>
-    </div>
+    </span>
 </template>
 
 <script>
