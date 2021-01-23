@@ -7,6 +7,7 @@
             :footer-props="{'items-per-page-text': 'Статей на странице'}"
             @update:pagination="updatePagination"
             @update:page="updatePage"
+            @update:options="updateOptions"
         >
             <template v-slot:item="{item}">
                 <thumbnail :article="item"/>
@@ -25,6 +26,10 @@ export default {
         }
     },
     methods: {
+        updateOptions (data) {
+            this.$store.commit('SET_PAGINATOR_PER_PAGE', data.itemsPerPage)
+            this.$store.dispatch('setArticles')
+        },
         updatePage (page) {
             this.$store.commit('SET_PAGINATOR_PAGE', page)
             this.$store.dispatch('setArticles')

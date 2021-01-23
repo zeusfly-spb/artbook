@@ -15,6 +15,9 @@ export default new Vuex.Store({
       }
   },
   mutations: {
+      SET_PAGINATOR_PER_PAGE (state, perPage) {
+          state.paginator.per_page = perPage
+      },
       SET_PAGINATOR_PAGE (state, page) {
           state.paginator.page = page
       },
