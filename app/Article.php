@@ -23,6 +23,7 @@ class Article extends Model
         return explode('.', $this->text)[0];
     }
 
+
     protected static function boot()
     {
         parent::boot();

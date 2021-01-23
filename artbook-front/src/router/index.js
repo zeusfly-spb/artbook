@@ -17,6 +17,12 @@ const routes = [
     name: 'Articles',
     component: () => import('../views/Articles.vue'),
     meta: {title: 'Статьи'}
+  },
+  {
+    path: '/articles/:slug',
+    name: 'Article',
+    component: () => import('../views/Article'),
+    meta: {title: 'Просмотр статьи'}
   }
 ]
 

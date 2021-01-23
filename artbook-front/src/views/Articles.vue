@@ -1,5 +1,5 @@
 <template>
-    <v-flex>
+    <div>
         <v-data-table
             :items="articles"
             hide-default-header
@@ -12,7 +12,7 @@
                 <thumbnail :article="item"/>
             </template>
         </v-data-table>
-    </v-flex>
+    </div>
 </template>
 
 <script>

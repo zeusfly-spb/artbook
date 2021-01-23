@@ -12,16 +12,21 @@
                 min-width="150"
                 src="https://via.placeholder.com/50"
             />
-            <f-flex
+            <div
                 class="ml-1 flex-column"
             >
-                <h2>{{ article.header }}</h2>
+                <router-link
+                    :to="`/articles/${article.slug}`"
+                    style="text-decoration: none"
+                >
+                    <h2>{{ article.header }}</h2>
+                </router-link>
                 <span
                     class="caption"
                 >
                     {{ article.text }}
                 </span>
-            </f-flex>
+            </div>
         </v-card-text>
     </v-card>
 </template>
