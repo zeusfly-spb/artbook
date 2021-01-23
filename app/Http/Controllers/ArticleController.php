@@ -73,4 +73,15 @@ class ArticleController extends Controller
         }
         return $result;
     }
+
+    public function lastArticles()
+    {
+        try {
+            $articles = Article::latest()->limit(5)->get()->reverse();
+            $result = response()->json(['articles' => $articles->toArray()]);
+        } catch (Exception $e) {
+            $result = response()->json(['error' => "Ошибка загрузки последних статей"], 500);
+        }
+        return $result;
+    }
 }

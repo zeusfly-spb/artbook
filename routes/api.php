@@ -23,3 +23,4 @@ Route::get('/articles/{slug}', 'ArticleController@show');
 Route::post('/add_like', 'ArticleController@addLike');
 Route::post('/add_view', 'ArticleController@addView');
 Route::post('/add_comment', 'ArticleController@addComment');
+Route::get('/last_articles', 'ArticleController@lastArticles');
